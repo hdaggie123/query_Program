@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        Enter your query here!
+        Enter your query here
       </header>
     </div>
   );
