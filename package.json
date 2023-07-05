@@ -36,6 +36,7 @@
     ]
   },
   "devDependencies": {
-    "html-webpack-plugin": "^5.5.3"
+    "html-webpack-plugin": "^5.5.3",
+    "eslint-webpack-plugin": "2.3.0"
   }
 }
