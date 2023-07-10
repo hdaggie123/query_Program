@@ -1,0 +1,4 @@
+Frontend: I used Create React App to set up a React application for user input
+
+Search Engine: I created a custom search engine through Google and use of the custom JSON API. NOTE: The API is the free version so it can only be queried 100 times in a day.
+
