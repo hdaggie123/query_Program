@@ -50,7 +50,7 @@ function App() {
         <form id="query" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="query" >Riddle me not! Only answers here!</label>
-            <input type="text" className="form-control" id="query" name="query" placeholder="What is your questions?"/>
+            <input type="text" className="form-control" id="query" name="query" placeholder="What are your questions?"/>
           </div>
           <button type="submit" className="btn btn-primary">Submit here!</button>
           <button type="reset" className="btn btn-secondary" onClick={handleReset}>Reset here!</button>
