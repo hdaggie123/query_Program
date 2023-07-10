@@ -18,7 +18,7 @@ function App() {
       // Make an HTTP GET request to the Google Custom Search JSON API
       const response = await axios.get(
         `https://www.googleapis.com/customsearch/v1?key=AIzaSyASsZhFnPSGdCL4ia20M4FeZWfopbu8gH0&cx=b70849ddcb9c445be&q=${encodeURIComponent(
-          searchQuery
+          searchQuery.trim()
         )}`
       );
 
@@ -31,6 +31,10 @@ function App() {
       console.error('Error fetching search results:', error);
     }
   };
+  const handleReset = () => {
+    setQuery('');
+    setResult([]);
+  };
   
   return (
     <>
@@ -39,7 +43,7 @@ function App() {
         <label htmlFor="query">What is your Question?</label>
         <input type="text" id="query" name="query" />
         <button type="submit">Submit here!</button>
-        <button type="reset">Reset here!</button>
+        <button type="reset" onClick={handleReset}>Reset here!</button>
       </form>
     </div>
     <div id="result">
