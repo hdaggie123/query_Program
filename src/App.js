@@ -8,6 +8,7 @@ import './App.css';
 function App() {
   const [query, setQuery] = useState('');
   const [result, setResult] = useState([]);
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent form submission
 
@@ -15,6 +16,7 @@ function App() {
     const searchQuery = event.target.query.value;
 
     try {
+      setLoading(true);
       // Make an HTTP GET request to the Google Custom Search JSON API
       const response = await axios.get(
         `https://www.googleapis.com/customsearch/v1?key=AIzaSyASsZhFnPSGdCL4ia20M4FeZWfopbu8gH0&cx=b70849ddcb9c445be&q=${encodeURIComponent(
@@ -29,24 +31,33 @@ function App() {
       setResult(searchResults);
     } catch (error) {
       console.error('Error fetching search results:', error);
+      setResult(["Error fetching search results!"]);
+    }finally{ 
+      //Removes Loading message
+      setLoading(false);
     }
   };
   const handleReset = () => {
+    // Reset the form
     setQuery('');
     setResult([]);
   };
   
   return (
     <>
-    <div className="App">
-      <form id="query" onSubmit={handleSubmit}>
-        <label htmlFor="query">What is your Question?</label>
-        <input type="text" id="query" name="query" />
-        <button type="submit">Submit here!</button>
-        <button type="reset" onClick={handleReset}>Reset here!</button>
-      </form>
-    </div>
-    <div id="result">
+    <div className='App'>
+    <div>
+        <form id="query" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="query" >Riddle me not! Only answers here!</label>
+            <input type="text" className="form-control" id="query" name="query" placeholder="What is your questions?"/>
+          </div>
+          <button type="submit" className="btn btn-primary">Submit here!</button>
+          <button type="reset" className="btn btn-secondary" onClick={handleReset}>Reset here!</button>
+        </form>
+      </div>
+    <div id="result" className='ResultDisplay'>
+    {loading && <p>Loading results...</p>}
       {result.map((item, index) => (
         <div key={index}>
           <h3>{item.title}</h3>
@@ -54,6 +65,8 @@ function App() {
           <p>{item.snippet}</p>
         </div>
       ))}
+    </div>
+    <img src={process.env.PUBLIC_URL + '/Riddler.png'} alt="Riddler Picture" />
     </div>
   </>
   );
